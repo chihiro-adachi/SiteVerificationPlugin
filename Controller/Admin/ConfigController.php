@@ -32,11 +32,17 @@ class ConfigController extends AbstractController
     protected $configRepository;
 
     /**
+     * @var CacheUtil
+     */
+    protected $cacheUtil;
+
+    /**
      * ConfigController constructor.
      */
-    public function __construct(ConfigRepository $configRepository)
+    public function __construct(ConfigRepository $configRepository, CacheUtil $cacheUtil)
     {
         $this->configRepository = $configRepository;
+        $this->cacheUtil = $cacheUtil;
     }
 
     /**
@@ -103,8 +109,6 @@ class ConfigController extends AbstractController
 
             $this->addSuccess('登録しました。', 'admin');
 
-            $cacheUtil->clearCache();
-
             return $this->redirectToRoute('site_verification_plugin_admin_config');
         }
 
@@ -128,5 +132,7 @@ class ConfigController extends AbstractController
         $yaml = $ConfigArray ? Yaml::dump($ConfigArray) : '';
         $file = $this->getParameter('kernel.project_dir').'/app/PluginData/SiteVerificationPlugin/routes_generated.yaml';
         file_put_contents($file, $yaml);
+
+        $this->cacheUtil->clearCache();
     }
 }
