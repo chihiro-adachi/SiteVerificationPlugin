@@ -1,0 +1,3 @@
+_plg_site_verification_plugin_routes:
+  resource: '../../../../PluginData/SiteVerificationPlugin/routes_generated.yaml'
+  prefix:   /

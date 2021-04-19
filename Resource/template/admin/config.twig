@@ -1,0 +1,120 @@
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['store', 'plugin', 'plugin_list'] %}
+
+{% block title %}SiteVerificationPlugin{% endblock %}
+{% block sub_title %}プラグイン一覧{% endblock %}
+
+{% block javascript %}{% endblock %}
+
+{% block main %}
+    <div class="c-contentsArea__cols">
+        <div class="c-contentsArea__primaryCol">
+            <div class="c-primaryCol">
+                <div class="d-block mb-3">
+                    <a class="btn btn-ec-regular"
+                       href="{{ url('site_verification_plugin_admin_config_new') }}">{{ 'admin.common.registration__new'|trans }}</a>
+                </div>
+                <div class="card rounded border-0 mb-4">
+                    <div class="card-body p-0">
+                        <table class="table table-sm">
+                            <thead>
+                            <tr>
+                                <th class="border-top-0 pt-2 pb-2 text-center">
+                                    {{ 'ID'|trans }}
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center">
+                                    {{ '名前'|trans }}
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center">
+                                    {{ 'パス'|trans }}
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center">
+                                    {{ '出力内容'|trans }}
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for Config in Configs %}
+                                <tr>
+                                    <td class="align-middle text-center pl-3">
+                                        {{ Config.id }}
+                                    </td>
+                                    <td class="align-middle text-center pl-3">
+                                        {{ Config.name }}
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a href="{{ url('_plg_site_verification_plugin_routes_' ~ Config.id) }}" target="_blank">/{{ Config.path }}</a>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        {{ Config.content }}
+                                    </td>
+                                    <td class="align-middle pr-3">
+                                        <div class="text-right">
+                                            <div class="px-1 d-inline-block">
+                                                <a class="btn btn-ec-actionIcon action-edit"
+                                                   href="{{ url('site_verification_plugin_admin_config_edit', { 'id' : Config.id }) }}"
+                                                   data-tooltip="true"
+                                                   data-placement="top"
+                                                   data-original-title="{{ 'admin.common.edit'|trans }}">
+                                                    <i class="fa fa-pencil fa-lg text-secondary" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            <div class="px-1 d-inline-block">
+                                                <div class="d-inline-block mr-2" data-tooltip="true"
+                                                     data-placement="top"
+                                                     title="{{ 'admin.common.delete'|trans }}">
+                                                    <a class="btn btn-ec-actionIcon action-delete"
+                                                       data-toggle="modal"
+                                                       data-target="#config_delete_{{ Config.id }}">
+                                                        <i class="fa fa-close fa-lg text-secondary"
+                                                           aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="modal fade" id="config_delete_{{ Config.id }}" tabindex="-1"
+                                                     role="dialog"
+                                                     aria-labelledby="config_delete_{{ Config.id }}" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title font-weight-bold">
+                                                                    {{ '削除します'|trans }}</h5>
+                                                                <button class="close" type="button"
+                                                                        data-dismiss="modal"
+                                                                        aria-label="Close"><span
+                                                                            aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body text-left">
+                                                                <p class="text-left">
+                                                                    {{ '削除してよろしいですか？'|trans }}</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-ec-sub" type="button"
+                                                                        data-dismiss="modal">{{ 'admin.common.cancel'|trans }}
+                                                                </button>
+                                                                <a class="btn btn-ec-delete"
+                                                                   href="{{ url('site_verification_plugin_admin_config_delete', {id: Config.id}) }}"
+                                                                        {{ csrf_token_for_anchor() }}
+                                                                   data-method="delete" data-confirm="false">
+                                                                    {{ 'admin.common.delete'|trans }}
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
