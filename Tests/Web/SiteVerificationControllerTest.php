@@ -30,13 +30,13 @@ class SiteVerificationControllerTest extends AbstractWebTestCase
             ],
         ];
         $yaml = Yaml::dump($route);
-        $file = $this->container->getParameter('kernel.project_dir').'/app/PluginData/SiteVerificationPlugin/routes_generated.yaml';
+        $file = self::$container->getParameter('kernel.project_dir').'/app/PluginData/SiteVerificationPlugin/routes_generated.yaml';
         file_put_contents($file, $yaml);
     }
 
     public function tearDown()
     {
-        $file = $this->container->getParameter('kernel.project_dir').'/app/PluginData/SiteVerificationPlugin/routes_generated.yaml';
+        $file = self::$container->getParameter('kernel.project_dir').'/app/PluginData/SiteVerificationPlugin/routes_generated.yaml';
         file_put_contents($file, '');
 
         parent::tearDown();
