@@ -59,7 +59,7 @@ class SiteVerificationController extends AbstractController
             new NotBlank(),
             new Length(['max' => 255]),
             new Regex([
-                'pattern' => '/^[a-zA-Z0-9\\.]+$/',
+                'pattern' => '/^[a-zA-Z0-9\\.\\-\\_]+$/',
             ]),
         ]);
 
