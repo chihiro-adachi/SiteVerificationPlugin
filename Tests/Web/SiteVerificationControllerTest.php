@@ -46,7 +46,7 @@ class SiteVerificationControllerTest extends AbstractWebTestCase
     public function testIndex()
     {
         if (version_compare(Constant::VERSION, '4.1', '>=')) {
-            self::markTestIncomplete();
+            //self::markTestIncomplete();
         }
 
         $Config = new Config();
@@ -67,7 +67,7 @@ class SiteVerificationControllerTest extends AbstractWebTestCase
     public function testNotFound()
     {
         if (version_compare(Constant::VERSION, '4.1', '>=')) {
-            self::markTestIncomplete();
+            //self::markTestIncomplete();
         }
 
         $this->client->request(
