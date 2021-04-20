@@ -77,7 +77,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          path: app/Plugin/${PLUGIN_NAME}
+          path: app/Plugin/${{ env.PLUGIN_NAME }}
 
       - name: Setup EC-CUBE and Plugin
         run: |
