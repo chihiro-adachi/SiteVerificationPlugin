@@ -37,15 +37,9 @@ class SiteVerificationController extends AbstractController
      */
     protected $validator;
 
-    /**
-     * @var EccubeConfig
-     */
-    private $config;
-
-    public function __construct(ConfigRepository $configRepository, EccubeConfig $config, ValidatorInterface $validator)
+    public function __construct(ConfigRepository $configRepository, ValidatorInterface $validator)
     {
         $this->configRepository = $configRepository;
-        $this->config = $config;
         $this->validator = $validator;
     }
 
