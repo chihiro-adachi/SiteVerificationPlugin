@@ -67,6 +67,6 @@ class SiteVerificationController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        return new Response(htmlspecialchars($Config->getContent(), ENT_QUOTES, 'UTF-8'));
+        return new Response($Config->getContent());
     }
 }
